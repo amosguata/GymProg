@@ -1,0 +1,571 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GymProgDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DrillMuscleGroups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DrillId" Type="int" Nullable="false" />
+          <Property Name="MuscleGroupId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Drills">
+          <Key>
+            <PropertyRef Name="DrillId" />
+          </Key>
+          <Property Name="DrillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatorUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MuscleGroups">
+          <Key>
+            <PropertyRef Name="MuscleGroupId" />
+          </Key>
+          <Property Name="MuscleGroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProgramDrills">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProgramId" Type="int" Nullable="false" />
+          <Property Name="DrillId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Programs">
+          <Key>
+            <PropertyRef Name="ProgramId" />
+          </Key>
+          <Property Name="ProgramId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProgramName" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sets">
+          <Key>
+            <PropertyRef Name="SetId" />
+          </Key>
+          <Property Name="SetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProgramDrillId" Type="int" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="Repetitions" Type="smallint" Nullable="false" />
+          <Property Name="Weight" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserPrograms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ProgramId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Permission" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DrillMuscleGroups_Drills">
+          <End Role="Drills" Type="Self.Drills" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DrillMuscleGroups" Type="Self.DrillMuscleGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drills">
+              <PropertyRef Name="DrillId" />
+            </Principal>
+            <Dependent Role="DrillMuscleGroups">
+              <PropertyRef Name="DrillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DrillMuscleGroups_MuscleGroups">
+          <End Role="MuscleGroups" Type="Self.MuscleGroups" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DrillMuscleGroups" Type="Self.DrillMuscleGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MuscleGroups">
+              <PropertyRef Name="MuscleGroupId" />
+            </Principal>
+            <Dependent Role="DrillMuscleGroups">
+              <PropertyRef Name="MuscleGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drills_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Drills" Type="Self.Drills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Drills">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProgramDrills_Drills">
+          <End Role="Drills" Type="Self.Drills" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProgramDrills" Type="Self.ProgramDrills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drills">
+              <PropertyRef Name="DrillId" />
+            </Principal>
+            <Dependent Role="ProgramDrills">
+              <PropertyRef Name="DrillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProgramDrills_Programs">
+          <End Role="Programs" Type="Self.Programs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProgramDrills" Type="Self.ProgramDrills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Programs">
+              <PropertyRef Name="ProgramId" />
+            </Principal>
+            <Dependent Role="ProgramDrills">
+              <PropertyRef Name="ProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sets_ProgramDrills">
+          <End Role="ProgramDrills" Type="Self.ProgramDrills" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sets" Type="Self.Sets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProgramDrills">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sets">
+              <PropertyRef Name="ProgramDrillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPrograms_Programs">
+          <End Role="Programs" Type="Self.Programs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserPrograms" Type="Self.UserPrograms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Programs">
+              <PropertyRef Name="ProgramId" />
+            </Principal>
+            <Dependent Role="UserPrograms">
+              <PropertyRef Name="ProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPrograms_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserPrograms" Type="Self.UserPrograms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserPrograms">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GymProgDBModelStoreContainer">
+          <EntitySet Name="DrillMuscleGroups" EntityType="Self.DrillMuscleGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Drills" EntityType="Self.Drills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MuscleGroups" EntityType="Self.MuscleGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProgramDrills" EntityType="Self.ProgramDrills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Programs" EntityType="Self.Programs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sets" EntityType="Self.Sets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserPrograms" EntityType="Self.UserPrograms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DrillMuscleGroups_Drills" Association="Self.FK_DrillMuscleGroups_Drills">
+            <End Role="Drills" EntitySet="Drills" />
+            <End Role="DrillMuscleGroups" EntitySet="DrillMuscleGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DrillMuscleGroups_MuscleGroups" Association="Self.FK_DrillMuscleGroups_MuscleGroups">
+            <End Role="MuscleGroups" EntitySet="MuscleGroups" />
+            <End Role="DrillMuscleGroups" EntitySet="DrillMuscleGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drills_Users" Association="Self.FK_Drills_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Drills" EntitySet="Drills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProgramDrills_Drills" Association="Self.FK_ProgramDrills_Drills">
+            <End Role="Drills" EntitySet="Drills" />
+            <End Role="ProgramDrills" EntitySet="ProgramDrills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProgramDrills_Programs" Association="Self.FK_ProgramDrills_Programs">
+            <End Role="Programs" EntitySet="Programs" />
+            <End Role="ProgramDrills" EntitySet="ProgramDrills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sets_ProgramDrills" Association="Self.FK_Sets_ProgramDrills">
+            <End Role="ProgramDrills" EntitySet="ProgramDrills" />
+            <End Role="Sets" EntitySet="Sets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPrograms_Programs" Association="Self.FK_UserPrograms_Programs">
+            <End Role="Programs" EntitySet="Programs" />
+            <End Role="UserPrograms" EntitySet="UserPrograms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPrograms_Users" Association="Self.FK_UserPrograms_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserPrograms" EntitySet="UserPrograms" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GymProgDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="GymProgDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DrillMuscleGroups" EntityType="GymProgDBModel.DrillMuscleGroup" />
+          <EntitySet Name="Drills" EntityType="GymProgDBModel.Drill" />
+          <EntitySet Name="MuscleGroups" EntityType="GymProgDBModel.MuscleGroup" />
+          <EntitySet Name="ProgramDrills" EntityType="GymProgDBModel.ProgramDrill" />
+          <EntitySet Name="Programs" EntityType="GymProgDBModel.Program" />
+          <EntitySet Name="Sets" EntityType="GymProgDBModel.Set" />
+          <EntitySet Name="UserPrograms" EntityType="GymProgDBModel.UserProgram" />
+          <EntitySet Name="Users" EntityType="GymProgDBModel.User" />
+          <AssociationSet Name="FK_DrillMuscleGroups_Drills" Association="GymProgDBModel.FK_DrillMuscleGroups_Drills">
+            <End Role="Drill" EntitySet="Drills" />
+            <End Role="DrillMuscleGroup" EntitySet="DrillMuscleGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DrillMuscleGroups_MuscleGroups" Association="GymProgDBModel.FK_DrillMuscleGroups_MuscleGroups">
+            <End Role="MuscleGroup" EntitySet="MuscleGroups" />
+            <End Role="DrillMuscleGroup" EntitySet="DrillMuscleGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drills_Users" Association="GymProgDBModel.FK_Drills_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Drill" EntitySet="Drills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProgramDrills_Drills" Association="GymProgDBModel.FK_ProgramDrills_Drills">
+            <End Role="Drill" EntitySet="Drills" />
+            <End Role="ProgramDrill" EntitySet="ProgramDrills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProgramDrills_Programs" Association="GymProgDBModel.FK_ProgramDrills_Programs">
+            <End Role="Program" EntitySet="Programs" />
+            <End Role="ProgramDrill" EntitySet="ProgramDrills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sets_ProgramDrills" Association="GymProgDBModel.FK_Sets_ProgramDrills">
+            <End Role="ProgramDrill" EntitySet="ProgramDrills" />
+            <End Role="Set" EntitySet="Sets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPrograms_Programs" Association="GymProgDBModel.FK_UserPrograms_Programs">
+            <End Role="Program" EntitySet="Programs" />
+            <End Role="UserProgram" EntitySet="UserPrograms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPrograms_Users" Association="GymProgDBModel.FK_UserPrograms_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserProgram" EntitySet="UserPrograms" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="DrillMuscleGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DrillId" Type="Int32" Nullable="false" />
+          <Property Name="MuscleGroupId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Drill" Relationship="GymProgDBModel.FK_DrillMuscleGroups_Drills" FromRole="DrillMuscleGroup" ToRole="Drill" />
+          <NavigationProperty Name="MuscleGroup" Relationship="GymProgDBModel.FK_DrillMuscleGroups_MuscleGroups" FromRole="DrillMuscleGroup" ToRole="MuscleGroup" />
+        </EntityType>
+        <EntityType Name="Drill">
+          <Key>
+            <PropertyRef Name="DrillId" />
+          </Key>
+          <Property Name="DrillId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatorUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DrillMuscleGroups" Relationship="GymProgDBModel.FK_DrillMuscleGroups_Drills" FromRole="Drill" ToRole="DrillMuscleGroup" />
+          <NavigationProperty Name="User" Relationship="GymProgDBModel.FK_Drills_Users" FromRole="Drill" ToRole="User" />
+          <NavigationProperty Name="ProgramDrills" Relationship="GymProgDBModel.FK_ProgramDrills_Drills" FromRole="Drill" ToRole="ProgramDrill" />
+        </EntityType>
+        <EntityType Name="MuscleGroup">
+          <Key>
+            <PropertyRef Name="MuscleGroupId" />
+          </Key>
+          <Property Name="MuscleGroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DrillMuscleGroups" Relationship="GymProgDBModel.FK_DrillMuscleGroups_MuscleGroups" FromRole="MuscleGroup" ToRole="DrillMuscleGroup" />
+        </EntityType>
+        <EntityType Name="ProgramDrill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProgramId" Type="Int32" Nullable="false" />
+          <Property Name="DrillId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Drill" Relationship="GymProgDBModel.FK_ProgramDrills_Drills" FromRole="ProgramDrill" ToRole="Drill" />
+          <NavigationProperty Name="Program" Relationship="GymProgDBModel.FK_ProgramDrills_Programs" FromRole="ProgramDrill" ToRole="Program" />
+          <NavigationProperty Name="Sets" Relationship="GymProgDBModel.FK_Sets_ProgramDrills" FromRole="ProgramDrill" ToRole="Set" />
+        </EntityType>
+        <EntityType Name="Program">
+          <Key>
+            <PropertyRef Name="ProgramId" />
+          </Key>
+          <Property Name="ProgramId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProgramName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProgramDrills" Relationship="GymProgDBModel.FK_ProgramDrills_Programs" FromRole="Program" ToRole="ProgramDrill" />
+          <NavigationProperty Name="UserPrograms" Relationship="GymProgDBModel.FK_UserPrograms_Programs" FromRole="Program" ToRole="UserProgram" />
+        </EntityType>
+        <EntityType Name="Set">
+          <Key>
+            <PropertyRef Name="SetId" />
+          </Key>
+          <Property Name="SetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProgramDrillId" Type="Int32" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="Repetitions" Type="Int16" Nullable="false" />
+          <Property Name="Weight" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="ProgramDrill" Relationship="GymProgDBModel.FK_Sets_ProgramDrills" FromRole="Set" ToRole="ProgramDrill" />
+        </EntityType>
+        <EntityType Name="UserProgram">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ProgramId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Program" Relationship="GymProgDBModel.FK_UserPrograms_Programs" FromRole="UserProgram" ToRole="Program" />
+          <NavigationProperty Name="User" Relationship="GymProgDBModel.FK_UserPrograms_Users" FromRole="UserProgram" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Permission" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Drills" Relationship="GymProgDBModel.FK_Drills_Users" FromRole="User" ToRole="Drill" />
+          <NavigationProperty Name="UserPrograms" Relationship="GymProgDBModel.FK_UserPrograms_Users" FromRole="User" ToRole="UserProgram" />
+        </EntityType>
+        <Association Name="FK_DrillMuscleGroups_Drills">
+          <End Type="GymProgDBModel.Drill" Role="Drill" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GymProgDBModel.DrillMuscleGroup" Role="DrillMuscleGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drill">
+              <PropertyRef Name="DrillId" />
+            </Principal>
+            <Dependent Role="DrillMuscleGroup">
+              <PropertyRef Name="DrillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DrillMuscleGroups_MuscleGroups">
+          <End Type="GymProgDBModel.MuscleGroup" Role="MuscleGroup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GymProgDBModel.DrillMuscleGroup" Role="DrillMuscleGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MuscleGroup">
+              <PropertyRef Name="MuscleGroupId" />
+            </Principal>
+            <Dependent Role="DrillMuscleGroup">
+              <PropertyRef Name="MuscleGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drills_Users">
+          <End Type="GymProgDBModel.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GymProgDBModel.Drill" Role="Drill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Drill">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProgramDrills_Drills">
+          <End Type="GymProgDBModel.Drill" Role="Drill" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GymProgDBModel.ProgramDrill" Role="ProgramDrill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drill">
+              <PropertyRef Name="DrillId" />
+            </Principal>
+            <Dependent Role="ProgramDrill">
+              <PropertyRef Name="DrillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProgramDrills_Programs">
+          <End Type="GymProgDBModel.Program" Role="Program" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GymProgDBModel.ProgramDrill" Role="ProgramDrill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Program">
+              <PropertyRef Name="ProgramId" />
+            </Principal>
+            <Dependent Role="ProgramDrill">
+              <PropertyRef Name="ProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sets_ProgramDrills">
+          <End Type="GymProgDBModel.ProgramDrill" Role="ProgramDrill" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GymProgDBModel.Set" Role="Set" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProgramDrill">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Set">
+              <PropertyRef Name="ProgramDrillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPrograms_Programs">
+          <End Type="GymProgDBModel.Program" Role="Program" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GymProgDBModel.UserProgram" Role="UserProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Program">
+              <PropertyRef Name="ProgramId" />
+            </Principal>
+            <Dependent Role="UserProgram">
+              <PropertyRef Name="ProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPrograms_Users">
+          <End Type="GymProgDBModel.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GymProgDBModel.UserProgram" Role="UserProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserProgram">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GymProgDBModelStoreContainer" CdmEntityContainer="GymProgDBEntities">
+          <EntitySetMapping Name="DrillMuscleGroups">
+            <EntityTypeMapping TypeName="GymProgDBModel.DrillMuscleGroup">
+              <MappingFragment StoreEntitySet="DrillMuscleGroups">
+                <ScalarProperty Name="MuscleGroupId" ColumnName="MuscleGroupId" />
+                <ScalarProperty Name="DrillId" ColumnName="DrillId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drills">
+            <EntityTypeMapping TypeName="GymProgDBModel.Drill">
+              <MappingFragment StoreEntitySet="Drills">
+                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DrillId" ColumnName="DrillId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MuscleGroups">
+            <EntityTypeMapping TypeName="GymProgDBModel.MuscleGroup">
+              <MappingFragment StoreEntitySet="MuscleGroups">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MuscleGroupId" ColumnName="MuscleGroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProgramDrills">
+            <EntityTypeMapping TypeName="GymProgDBModel.ProgramDrill">
+              <MappingFragment StoreEntitySet="ProgramDrills">
+                <ScalarProperty Name="DrillId" ColumnName="DrillId" />
+                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Programs">
+            <EntityTypeMapping TypeName="GymProgDBModel.Program">
+              <MappingFragment StoreEntitySet="Programs">
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sets">
+            <EntityTypeMapping TypeName="GymProgDBModel.Set">
+              <MappingFragment StoreEntitySet="Sets">
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Repetitions" ColumnName="Repetitions" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ProgramDrillId" ColumnName="ProgramDrillId" />
+                <ScalarProperty Name="SetId" ColumnName="SetId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserPrograms">
+            <EntityTypeMapping TypeName="GymProgDBModel.UserProgram">
+              <MappingFragment StoreEntitySet="UserPrograms">
+                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="GymProgDBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Permission" ColumnName="Permission" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

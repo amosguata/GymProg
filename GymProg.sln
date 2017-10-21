@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymProgAndroidUI", "GymProg\GymProgAndroidUI.csproj", "{6FCBD8BD-4B38-4A80-8DFE-C473E293DE84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymProgWebApiDAL", "GymProgWebApiDAL\GymProgWebApiDAL.csproj", "{42AD53DF-ACC2-4116-8D83-4FA43DE257FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymProgWebApiBL", "GymProgWebApiBL\GymProgWebApiBL.csproj", "{EE8CE17A-70C1-4383-8CA2-832906CCE1F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymProgUI", "GymProgUI\GymProgUI.csproj", "{67F9D3A8-F71E-4428-913F-C37AE82CDB24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymProgFramework", "GymProgFramework1\GymProgFramework.csproj", "{60234052-4B98-4DCF-8AB8-06CF4B067D7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6FCBD8BD-4B38-4A80-8DFE-C473E293DE84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FCBD8BD-4B38-4A80-8DFE-C473E293DE84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FCBD8BD-4B38-4A80-8DFE-C473E293DE84}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{6FCBD8BD-4B38-4A80-8DFE-C473E293DE84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FCBD8BD-4B38-4A80-8DFE-C473E293DE84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FCBD8BD-4B38-4A80-8DFE-C473E293DE84}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{42AD53DF-ACC2-4116-8D83-4FA43DE257FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42AD53DF-ACC2-4116-8D83-4FA43DE257FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42AD53DF-ACC2-4116-8D83-4FA43DE257FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42AD53DF-ACC2-4116-8D83-4FA43DE257FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE8CE17A-70C1-4383-8CA2-832906CCE1F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE8CE17A-70C1-4383-8CA2-832906CCE1F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE8CE17A-70C1-4383-8CA2-832906CCE1F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE8CE17A-70C1-4383-8CA2-832906CCE1F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60234052-4B98-4DCF-8AB8-06CF4B067D7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60234052-4B98-4DCF-8AB8-06CF4B067D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60234052-4B98-4DCF-8AB8-06CF4B067D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60234052-4B98-4DCF-8AB8-06CF4B067D7E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

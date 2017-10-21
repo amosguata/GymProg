@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GymProgUI.Views.SetContentView">
+  <ContentView.Content>
+        <Grid x:Name="SetGrid" IsVisible="{Binding IsVisable}" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label FontSize="Small" Text="Reps" Grid.Row="0" Grid.Column="0" ></Label>
+            <Label  FontSize="Small" Text="{Binding Repetitions, Mode=TwoWay}" x:Name="repetition" HorizontalOptions="Center" Grid.Row="1" Grid.Column="0"></Label>
+            <StackLayout x:Name="repetitionStepper" Spacing="0" IsVisible="{Binding IsEditable}" Grid.Row="2" Grid.Column="0" >
+                <Image x:Name="repetitionsDecrease" Grid.Row="0" Grid.Column="1"  Source="add.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RepetitionsIncreasement}">
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image x:Name="repetitionsIncrease" Grid.Row="0" Grid.Column="0" Source="remove.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RepetitionsDecreasement}">
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+            <Label FontSize="Small" Text="Weight" Grid.Row="0" Grid.Column="1" ></Label>
+            <Label  FontSize="Small" Text="{Binding Weight, Mode=TwoWay}" HorizontalOptions="Center"  x:Name="weight"   Grid.Row="1" Grid.Column="1"></Label>
+            <StackLayout  x:Name="weightStepper" IsVisible="{Binding IsEditable}" Spacing="0"  Grid.Row="2" Grid.Column="1" >
+                <Image x:Name="weightDecrease"  Grid.Row="0" Grid.Column="1" Source="add.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding WeightIncreasement}">
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image x:Name="weightIncrease" Grid.Row="0" Grid.Column="0" Source="remove.png" >
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding WeightDecreasement}">
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

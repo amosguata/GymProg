@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Pages:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GymProgUI.Views.LoginPage"
+             xmlns:Pages="clr-namespace:GymProgUI.Views;assembly=BasePage">
+    <Pages:BasePage.Content>
+        <StackLayout>
+            <Entry Placeholder="User Name" Text="{Binding User.Name}">
+            </Entry>
+            <Entry Placeholder="Password" IsPassword="True" Text="{Binding User.Password}">
+            </Entry>
+            <Button Text="Login" Command="{Binding Login}">
+            </Button>
+            <Button Text="Create New Account" Command="{Binding CreateNewAccount}">
+            </Button>
+        </StackLayout>
+    </Pages:BasePage.Content>
+</Pages:BasePage>

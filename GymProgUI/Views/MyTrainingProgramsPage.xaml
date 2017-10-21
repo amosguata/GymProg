@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Pages:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GymProgUI.Views.MyTrainingProgramsPage"
+             xmlns:Pages="clr-namespace:GymProgUI.Views;assembly=BasePage">
+    <Pages:BasePage.Content>
+        <StackLayout>
+            <ListView IsVisible="{Binding IsTrainee}" ItemsSource="{Binding Programs}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding Name}"></Label>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="Create New Program" Command="{Binding AddProgram}" IsVisible="{Binding isTrainerOrAdmin}"></Button>
+            <Button Text="Create New Drill" Command="{Binding AddDrill}" IsVisible="{Binding isTrainerOrAdmin}" ></Button>
+            <Button Text="Manage Programs" Command="{Binding SelectProgram}" IsVisible="{Binding isTrainerOrAdmin}"></Button>
+            <Button Text="Manage Drills" Command="{Binding SelectDrill}" IsVisible="{Binding isTrainerOrAdmin}"></Button>
+            <Button Text="Manage Users" Command="{Binding SelectUser}" IsVisible="{Binding IsAdmin}"></Button>
+            <Button Text="Add Program" Command="{Binding AddProgram}" IsVisible="{Binding IsTrainee}"></Button>
+            <Button Text="View Program" Command="{Binding ViewProgram}" IsVisible="{Binding CanViewProgram}"></Button>
+            <Button Text="Edit Program" Command="{Binding EditProgram}" IsVisible="{Binding CanViewProgram}"></Button>
+        </StackLayout>
+    </Pages:BasePage.Content>
+</Pages:BasePage>

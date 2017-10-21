@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Pages:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GymProgUI.Views.DrillPage"
+             xmlns:Pages="clr-namespace:GymProgUI.Views;assembly=BasePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Placeholder="Drill Name" Text="{Binding Drill.Name}" />
+            <Label FontSize="Medium" Text="Description"></Label>
+            <Editor HeightRequest="100"  Text="{Binding Drill.Description}" />
+            <Label Text="Muscle Groups" FontSize="Large"></Label>
+            <ListView ItemsSource="{Binding PossibleMuscleGroups}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid VerticalOptions="Start">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label FontSize="Medium" Text="{Binding Name}" Grid.Row="0" Grid.Column="0"></Label>
+                                <Switch IsToggled="{Binding ShouldInclude}" Grid.Row="0" Grid.Column="1"></Switch>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="Create" Command="{Binding Add}" IsVisible="{Binding IsInCreateMode}"></Button>
+            <Button Text="Update" Command="{Binding Update}" IsVisible="{Binding IsInEditMode}"></Button>
+            <Button Text="Delete" Command="{Binding Delete}" IsVisible="{Binding IsInEditMode}"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</Pages:BasePage>

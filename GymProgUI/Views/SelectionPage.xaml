@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Pages:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GymProgUI.Views.SelectionPage"
+             xmlns:Pages="clr-namespace:GymProgUI.Views;assembly=BasePage">
+    <Pages:BasePage.Content>
+        <StackLayout>
+            <Entry Placeholder="Search" Text="{Binding SearchText}" > </Entry>
+            <ListView ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding Name}"> </Label>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="Select" Command="{Binding SelectItem}"/>
+        </StackLayout>
+    </Pages:BasePage.Content>
+</Pages:BasePage>

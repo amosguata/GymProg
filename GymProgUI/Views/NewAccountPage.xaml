@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Pages:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GymProgUI.Views.NewAccountPage"
+             xmlns:Pages="clr-namespace:GymProgUI.Views;assembly=BasePage">
+    <Pages:BasePage.Content>
+        <StackLayout>
+            <Entry Placeholder="User Name" Text="{Binding NewUser.UserName}">
+            </Entry>
+            <Entry Placeholder="Password" IsPassword="True" Text="{Binding NewUser.Password}">
+            </Entry>
+            <Picker Title="Account Type" SelectedIndex="{Binding NewUser.Permission}">
+                <Picker.Items>
+                    <x:String>Trainer</x:String>
+                    <x:String>Trainee</x:String>
+                </Picker.Items>
+            </Picker>
+            <Button Text="Create" Command="{Binding CreateNewUser}">
+            </Button>
+        </StackLayout>
+    </Pages:BasePage.Content>
+</Pages:BasePage>
